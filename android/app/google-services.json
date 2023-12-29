@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "951619617188",
+    "project_id": "swasthya-setu-b3039",
+    "storage_bucket": "swasthya-setu-b3039.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951619617188:android:73438630234898d8c68131",
+        "android_client_info": {
+          "package_name": "com.example.swasthya_setu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUwDg5ZrddzO1-444Qe7IcomCXTpStQv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
