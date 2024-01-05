@@ -41,6 +41,7 @@ class Authorization {
     try {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       StorageMethods _storage = StorageMethods(_auth);
       String photoURL = await _storage.uploadImage(file);
 
@@ -55,8 +56,11 @@ class Authorization {
           bio,
           qualification,
           password,
-          specializations,"Doctor");
+          specializations,
+          "Doctor");
       await _storage.uploadDoctorData(doctor, cred);
+      await cred.user?.updateDisplayName("Doctor");
+      await cred.user?.updatePhotoURL(photoURL);
       getScaffold("Account Created Successfully", context, Colors.green);
       Navigator.of(context).pop();
     } catch (e) {
@@ -88,13 +92,31 @@ class UserAuthorization {
       String photoURL = await _storage.uploadImage(file);
 
       UserDetails user = UserDetails(cred.user!.uid, age, address, email,
-          photoURL, name, gender, password,"User");
+          photoURL, name, gender, password, "User");
       await _storage.uploadUserData(user, cred);
+      await cred.user?.updateDisplayName("User");
+      await cred.user?.updatePhotoURL(photoURL);
       getScaffold("Account Created Successfully", context, Colors.green);
       Navigator.of(context).pop();
     } catch (e) {
       // print(e);
       getScaffold(e.toString(), context, Colors.red);
+    }
+  }
+}
+
+class LoginMethod {
+  final BuildContext context;
+  final FirebaseAuth _auth;
+  LoginMethod(this.context, this._auth);
+  Future<bool> loginUser(String mail, String pass) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: mail, password: pass);
+      getScaffold("Logged In Successfully", context, Colors.green);
+      return true;
+    } catch (e) {
+      getScaffold("Login Failed", context, Colors.red);
+      return false;
     }
   }
 }

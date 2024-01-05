@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:swasthya_setu/backend/authorization.dart';
 import 'package:swasthya_setu/get_image/getimage.dart';
+import 'package:swasthya_setu/pages/loginpage.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 // import 'package:swasthya_setu/utils/customcheckbox.dart';
 import 'package:swasthya_setu/utils/customtextfield.dart';
@@ -47,11 +48,19 @@ class _SigninUserPageState extends State<SigninUserPage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-              SizedBox(
+                SizedBox(
                   height: constraints.maxHeight * 0.02,
                 ),
-                const Text("Already Have Account Click Here",style: TextStyle(color: Colors.blue),)
-                ,SizedBox(
+                GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                    child: const Text(
+                      "Already Have Account Click Here",
+                      style: TextStyle(color: Colors.blue),
+                    )),
+                SizedBox(
                   height: constraints.maxHeight * 0.02,
                 ),
                 Stack(children: [
@@ -90,7 +99,6 @@ class _SigninUserPageState extends State<SigninUserPage> {
                       SizedBox(
                         height: constraints.maxHeight * 0.05,
                       ),
-                     
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -136,8 +144,8 @@ class _SigninUserPageState extends State<SigninUserPage> {
                       SizedBox(
                         height: constraints.maxHeight * 0.05,
                       ),
-                      getTextField("Password",
-                          constraints.maxHeight * 0.05, _getPassword),
+                      getTextField("Password", constraints.maxHeight * 0.05,
+                          _getPassword),
                       SizedBox(
                         height: constraints.maxHeight * 0.05,
                       ),
@@ -154,12 +162,11 @@ class _SigninUserPageState extends State<SigninUserPage> {
                       ),
                       CupertinoButton(
                         onPressed: () {
-                           if (_getAddress.text.isEmpty ||
+                          if (_getAddress.text.isEmpty ||
                               _imagedp == null ||
                               _getAge.text.isEmpty ||
                               _getEmail.text.isEmpty ||
-                              _getPassword.text.isEmpty 
-                              ) {
+                              _getPassword.text.isEmpty) {
                             getScaffold("Some Enteries are not filled", context,
                                 Colors.red);
                           } else {
