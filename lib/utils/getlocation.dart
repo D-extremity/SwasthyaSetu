@@ -5,12 +5,12 @@ Location location = Location();
 late bool _serviceEnabled;
 late PermissionStatus _permissionGranted;
 late LocationData locationData;
-Future<dynamic> getLocation() async {
+Future<String> getLocation() async {
   _serviceEnabled = await location.serviceEnabled();
   if (!_serviceEnabled) {
     _serviceEnabled = await location.requestService();
     if (!_serviceEnabled) {
-      return ;
+      return "Please Give Location Access";
     }
   }
 
@@ -18,7 +18,7 @@ Future<dynamic> getLocation() async {
   if (_permissionGranted == PermissionStatus.denied) {
     _permissionGranted = await location.requestPermission();
     if (_permissionGranted != PermissionStatus.granted) {
-      return;
+      return "Please Give Location Access";
     }
   }
 
@@ -30,5 +30,5 @@ Future<dynamic> getLocation() async {
   );
   // print(locationData);
   // print(address.streetAddress);
-  return address.streetAddress;
+  return address.streetAddress.toString();
 }

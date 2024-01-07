@@ -8,16 +8,20 @@ class AddressText extends StatefulWidget {
   State<AddressText> createState() => _AddressTextState();
 }
 
-String location = "Loading...";
-Future<void> getAddress() async {
-  location = await getLocation();
-}
 
 class _AddressTextState extends State<AddressText> {
+  String location = "Loading...";
+getAddress(BuildContext context) async {
+  location = await getLocation();
+  setState(() {
+    
+  });
+}
+
   @override
   void initState() {
-    getAddress();
     super.initState();
+    getAddress(context);
   }
 
   @override
