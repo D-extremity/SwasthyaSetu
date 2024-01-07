@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:swasthya_setu/doctor_pages/doctor_home_page.dart';
 import 'package:swasthya_setu/firebase_options.dart';
 import 'package:swasthya_setu/pages/signinoption_page.dart';
+import 'package:swasthya_setu/providers/details.dart';
 import 'package:swasthya_setu/user_pages/user_home_page.dart';
 
 void main() async {
@@ -18,24 +20,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
-      debugShowCheckedModeBanner: false,
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          // FirebaseFirestore getData = FirebaseFirestore.instance;
-
-          User getData = snapshot.data as User;
-          if (getData.displayName == "User") {
-            return const UserHomePage();
-          }else if (getData.displayName == "Doctor") {
-            return const DoctorHomePage();
-          }
-          // print(getData.displayName);
-          return const SignInOptionPage();
-        },
-        // child: const SignInOptionPage()
+    final size = MediaQuery.of(context).size;
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserDetailsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DoctorDetailsProvider(),
+        )
+      ],
+      child: MaterialApp(
+        theme: ThemeData(useMaterial3: true),
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+            // FirebaseFirestore getData = FirebaseFirestore.instance;
+            if (snapshot.hasData) {
+              User getData = snapshot.data as User;
+              if (getData.displayName == "User") {
+                
+                return UserHomePage(
+                  size: size,
+                );
+              } else if (getData.displayName == "Doctor") {
+                return DoctorHomePage(size: size);
+              }
+            }
+            // print(getData.displayName);
+            return const SignInOptionPage();
+          },
+          // child: const SignInOptionPage()
+        ),
       ),
     );
   }

@@ -36,7 +36,7 @@ class SignInOptionPage extends StatelessWidget {
                 CupertinoButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SigninDoctorPage()));
+                        builder: (context) => SigninDoctorPage(size: size,)));
                   },
                   color: mainwhite,
                   child: const Text(
@@ -50,7 +50,7 @@ class SignInOptionPage extends StatelessWidget {
                 CupertinoButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SigninUserPage()));
+                        builder: (context) => SigninUserPage(size: size)));
                   },
                   color: mainwhite,
                   child: const Text(

@@ -13,7 +13,8 @@ import 'package:swasthya_setu/utils/customtextfield.dart';
 import 'package:swasthya_setu/utils/toast.dart';
 
 class SigninDoctorPage extends StatefulWidget {
-  const SigninDoctorPage({super.key});
+  final Size size;
+  const SigninDoctorPage({super.key, required this.size});
 
   @override
   State<SigninDoctorPage> createState() => _SigninDoctorPageState();
@@ -59,11 +60,16 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
                 SizedBox(
                   height: constraints.maxHeight * 0.02,
                 ),
-                GestureDetector(onTap: (){
-                    Navigator.of(context).push(
+                GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => LoginPage()));
-                },child: const Text("Already Have Account Click Here",style: TextStyle(color: Colors.blue),))
-                ,SizedBox(
+                    },
+                    child: const Text(
+                      "Already Have Account Click Here",
+                      style: TextStyle(color: Colors.blue),
+                    )),
+                SizedBox(
                   height: constraints.maxHeight * 0.02,
                 ),
                 Stack(children: [
@@ -243,7 +249,8 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
                                     _getQualification.text,
                                     _getPassword.text.trim(),
                                     specializations,
-                                    context,)
+                                    context,
+                                    widget.size)
                                 .signUpWithEmail(image);
                           }
                         },

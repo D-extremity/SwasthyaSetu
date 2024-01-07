@@ -5,6 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swasthya_setu/backend/cloudstorage.dart';
 import 'package:swasthya_setu/backend/userdetails.dart';
+import 'package:swasthya_setu/doctor_pages/doctor_home_page.dart';
+import 'package:swasthya_setu/providers/details.dart';
+import 'package:swasthya_setu/user_pages/user_home_page.dart';
 import 'package:swasthya_setu/utils/toast.dart';
 
 class Authorization {
@@ -22,6 +25,7 @@ class Authorization {
   final String password;
   final List specializations;
   final BuildContext context;
+  final Size size;
 
   Authorization(
       this._auth,
@@ -36,7 +40,8 @@ class Authorization {
       this.qualification,
       this.password,
       this.specializations,
-      this.context);
+      this.context,
+      this.size);
   Future<void> signUpWithEmail(Uint8List file) async {
     try {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
@@ -62,7 +67,9 @@ class Authorization {
       await cred.user?.updateDisplayName("Doctor");
       await cred.user?.updatePhotoURL(photoURL);
       getScaffold("Account Created Successfully", context, Colors.green);
-      Navigator.of(context).pop();
+      await DoctorDetailsProvider().getDoctordetails();
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => DoctorHomePage(size: size)));
     } catch (e) {
       // print(e);
       getScaffold(e.toString(), context, Colors.red);
@@ -81,9 +88,20 @@ class UserAuthorization {
   final String gender;
   final String password;
   final BuildContext context;
+  final Size size;
 
-  UserAuthorization(this._auth, this.uid, this.age, this.address, this.email,
-      this.photourl, this.name, this.gender, this.password, this.context);
+  UserAuthorization(
+      this._auth,
+      this.uid,
+      this.age,
+      this.address,
+      this.email,
+      this.photourl,
+      this.name,
+      this.gender,
+      this.password,
+      this.context,
+      this.size);
   Future<void> signUpWithEmail(Uint8List file) async {
     try {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
@@ -97,7 +115,8 @@ class UserAuthorization {
       await cred.user?.updateDisplayName("User");
       await cred.user?.updatePhotoURL(photoURL);
       getScaffold("Account Created Successfully", context, Colors.green);
-      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => UserHomePage(size: size)));
     } catch (e) {
       // print(e);
       getScaffold(e.toString(), context, Colors.red);
@@ -109,14 +128,19 @@ class LoginMethod {
   final BuildContext context;
   final FirebaseAuth _auth;
   LoginMethod(this.context, this._auth);
-  Future<bool> loginUser(String mail, String pass) async {
+  Future<String?> loginUser(String mail, String pass) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: mail, password: pass);
+      UserCredential cred =
+          await _auth.signInWithEmailAndPassword(email: mail, password: pass);
       getScaffold("Logged In Successfully", context, Colors.green);
-      return true;
+      String? displayName = cred.user!.displayName;
+      displayName == "User"
+          ? await UserDetailsProvider().getUserdetails()
+          : await DoctorDetailsProvider().getDoctordetails();
+      return displayName;
     } catch (e) {
       getScaffold("Login Failed", context, Colors.red);
-      return false;
+      return "false";
     }
   }
 }

@@ -13,7 +13,8 @@ import 'package:swasthya_setu/utils/customtextfield.dart';
 import 'package:swasthya_setu/utils/toast.dart';
 
 class SigninUserPage extends StatefulWidget {
-  const SigninUserPage({super.key});
+  final Size size;
+  const SigninUserPage({super.key, required this.size});
 
   @override
   State<SigninUserPage> createState() => _SigninUserPageState();
@@ -181,7 +182,7 @@ class _SigninUserPageState extends State<SigninUserPage> {
                                     _getName.text.trim(),
                                     dropDownvalue!,
                                     _getPassword.text.trim(),
-                                    context)
+                                    context,widget.size)
                                 .signUpWithEmail(image);
                           }
                         },

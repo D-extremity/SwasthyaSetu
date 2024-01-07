@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DoctorHomePage extends StatelessWidget {
-  const DoctorHomePage({super.key});
+  final Size size;
+  const DoctorHomePage({super.key, required this.size});
 
   @override
   Widget build(BuildContext context) {
