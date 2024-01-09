@@ -20,9 +20,9 @@ class SigninDoctorPage extends StatefulWidget {
   State<SigninDoctorPage> createState() => _SigninDoctorPageState();
 }
 
-List<String> specializations = [];
 
 class _SigninDoctorPageState extends State<SigninDoctorPage> {
+
   TextEditingController _getName = TextEditingController();
   TextEditingController _getQualification = TextEditingController();
   TextEditingController _getBio = TextEditingController();
@@ -47,6 +47,7 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
   Uint8List? _imagedp;
   @override
   Widget build(BuildContext context) {
+    List<String> specializations = [];
     return SafeArea(
         child: Scaffold(
       backgroundColor: const Color.fromARGB(255, 199, 215, 180),
@@ -173,33 +174,33 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
                         children: [
                           Row(
                             children: [
-                              GetCheckBox(isName: ent, name: "ENT"),
-                              GetCheckBox(isName: physician, name: "Physician"),
-                              GetCheckBox(isName: dentist, name: "Dentist"),
+                              GetCheckBox(isName: ent, name: "ENT", specializations: specializations,),
+                              GetCheckBox(isName: physician, name: "Physician", specializations: specializations),
+                              GetCheckBox(isName: dentist, name: "Dentist", specializations: specializations),
                             ],
                           ),
                           Row(
                             children: [
                               GetCheckBox(
-                                  isName: pediatrician, name: "Pediatrician"),
+                                  isName: pediatrician, name: "Pediatrician", specializations: specializations),
                               GetCheckBox(
-                                  isName: cardiologist, name: "Cardiologist"),
+                                  isName: cardiologist, name: "Cardiologist", specializations: specializations),
                             ],
                           ),
                           Row(
                             children: [
                               GetCheckBox(
-                                  isName: neurologist, name: "Neurologist"),
+                                  isName: neurologist, name: "Neurologist", specializations: specializations),
                               GetCheckBox(
-                                  isName: dentist, name: "Dermatologist"),
+                                  isName: dentist, name: "Dermatologist", specializations: specializations),
                             ],
                           ),
                           Row(
                             children: [
                               GetCheckBox(
-                                  isName: homeopathy, name: "Homeopathy"),
-                              GetCheckBox(isName: alopathy, name: "Alopathy"),
-                              GetCheckBox(isName: ayurved, name: "Ayurvedic"),
+                                  isName: homeopathy, name: "Homeopathy", specializations: specializations),
+                              GetCheckBox(isName: alopathy, name: "Alopathy", specializations: specializations),
+                              GetCheckBox(isName: ayurved, name: "Ayurvedic", specializations: specializations),
                             ],
                           ),
                         ],
@@ -250,7 +251,7 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
                                     _getPassword.text.trim(),
                                     specializations,
                                     context,
-                                    widget.size)
+                                    widget.size,_getNumber.text)
                                 .signUpWithEmail(image);
                           }
                         },

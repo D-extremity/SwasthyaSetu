@@ -182,7 +182,7 @@ class _SigninUserPageState extends State<SigninUserPage> {
                                     _getName.text.trim(),
                                     dropDownvalue!,
                                     _getPassword.text.trim(),
-                                    context,widget.size)
+                                    context,widget.size,_getNumber.text)
                                 .signUpWithEmail(image);
                           }
                         },

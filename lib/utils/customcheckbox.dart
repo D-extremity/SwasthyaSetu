@@ -1,10 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:swasthya_setu/pages/signin_as_doctor.dart';
+
+// import 'package:swasthya_setu/pages/signin_as_doctor.dart';
 
 class GetCheckBox extends StatefulWidget {
   bool? isName;
   String name;
-  GetCheckBox({super.key, required this.isName, required this.name});
+  List specializations;
+  GetCheckBox({
+    Key? key,
+    this.isName,
+    required this.name,
+    required this.specializations,
+  }) : super(key: key);
 
   @override
   State<GetCheckBox> createState() => _GetCheckBoxState();
@@ -20,11 +28,11 @@ class _GetCheckBoxState extends State<GetCheckBox> {
             value: widget.isName,
             onChanged: (bool? value) {
               if (value == true) {
-                specializations.add(widget.name);
+                widget.specializations.add(widget.name);
               } else if (value == false) {
-                specializations.remove(widget.name);
+                widget.specializations.remove(widget.name);
               }
-              print(specializations);
+              print(widget.specializations);
               setState(() {
                 widget.isName = value;
               });

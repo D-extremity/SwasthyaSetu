@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +36,12 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
             // FirebaseFirestore getData = FirebaseFirestore.instance;
-            if (snapshot.hasData) {
+            if (snapshot.hasError) {
+              return const Text("Loading");
+            } else if (snapshot.hasData) {
               User getData = snapshot.data as User;
               if (getData.displayName == "User") {
-                
+              
                 return UserHomePage(
                   size: size,
                 );

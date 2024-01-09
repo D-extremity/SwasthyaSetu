@@ -7,12 +7,12 @@ TextField getTextField(String inputName,double size,TextEditingController _contr
     cursorHeight: size,
     controller: _controller,
     decoration: InputDecoration(
-        label: Text("$inputName"),
+        label: Text(inputName),
         filled: true,
         
         focusColor: Colors.grey.shade200,
         fillColor: Colors.grey.shade200,
-        border: OutlineInputBorder()),
+        border: const OutlineInputBorder()),
   );
 }
 
@@ -22,10 +22,25 @@ TextField getTextNumberField(String inputName,double size,TextInputType type ,Te
     cursorHeight: size,
     controller: _controller,
     decoration: InputDecoration(
-        label: Text("$inputName"),
+        label: Text(inputName),
         filled: true,
          focusColor: Colors.grey.shade200,
         fillColor: Colors.grey.shade200,
-        border: OutlineInputBorder()),
+        border: const OutlineInputBorder()),
+  );
+}
+
+
+TextField getReadTextField(String inputName,double size,String profileDetail) {
+  return TextField(
+    readOnly: true,
+    cursorHeight: size,
+    decoration: InputDecoration(
+        label: Text(profileDetail),
+        filled: true,
+        hintText: profileDetail,
+        focusColor: Colors.grey.shade200,
+        fillColor: Colors.grey.shade200,
+        border: const OutlineInputBorder()),
   );
 }

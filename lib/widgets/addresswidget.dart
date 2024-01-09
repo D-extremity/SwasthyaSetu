@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/getlocation.dart';
 
 class AddressText extends StatefulWidget {
@@ -8,15 +9,12 @@ class AddressText extends StatefulWidget {
   State<AddressText> createState() => _AddressTextState();
 }
 
-
 class _AddressTextState extends State<AddressText> {
-  String location = "Loading...";
-getAddress(BuildContext context) async {
-  location = await getLocation();
-  setState(() {
-    
-  });
-}
+  String _location = "Loading...";
+  getAddress(BuildContext context) async {
+    _location = await getLocation();
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -26,10 +24,30 @@ getAddress(BuildContext context) async {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "$location",
-      softWrap: true,
-      style: TextStyle(color: Colors.blue),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Row(children: [
+          Text("Refresh"),
+          IconButton(
+            icon: Icon(
+              Icons.refresh,
+              color: maingreen,
+            ),
+            onPressed: () async {
+              String add = await getLocation();
+              setState(() {
+                _location = add;
+              });
+            },
+          )
+        ]),
+        Text(
+          _location,
+          softWrap: true,
+          style: TextStyle(color: Colors.blue, fontSize: 10),
+        ),
+      ],
     );
   }
 }

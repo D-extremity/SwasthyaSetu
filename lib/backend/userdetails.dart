@@ -10,6 +10,7 @@ class DoctorDetails {
   final String qualification;
   final String password;
   final List specializations;
+  final String number;
   final String type;
 
   DoctorDetails(
@@ -24,6 +25,7 @@ class DoctorDetails {
       this.qualification,
       this.password,
       this.specializations,
+      this.number,
       this.type);
 
   Map<String, dynamic> getDetailsMap() {
@@ -39,7 +41,8 @@ class DoctorDetails {
       "qualification": qualification,
       "password": password,
       "specialization": specializations,
-      "type": type
+      "type": type,
+      "number": number
     };
   }
 }
@@ -54,18 +57,10 @@ class UserDetails {
   final String gender;
   final String password;
   final String type;
+  final String number;
 
-  UserDetails(
-    this.uid,
-    this.age,
-    this.address,
-    this.email,
-    this.photourl,
-    this.name,
-    this.gender,
-    this.password,
-    this.type
-  );
+  UserDetails(this.uid, this.age, this.address, this.email, this.photourl,
+      this.name, this.gender, this.password, this.type, this.number);
 
   Map<String, dynamic> getDetailsMap() {
     return {
@@ -77,7 +72,8 @@ class UserDetails {
       "name": name,
       "gender": gender,
       "password": password,
-      "type":type
+      "type": type,
+      "number": number
     };
   }
 }

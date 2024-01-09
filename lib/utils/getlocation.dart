@@ -28,7 +28,7 @@ Future<String> getLocation() async {
     latitude: locationData.latitude!,
     longitude: locationData.longitude!,
   );
-  // print(locationData);
-  // print(address.streetAddress);
-  return address.streetAddress.toString();
+  // print(address);
+  // print(address.region);
+  return "${address.city},${address.region}";
 }

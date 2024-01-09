@@ -19,16 +19,16 @@ class UserDetailsProvider extends ChangeNotifier {
 }
 
 class DoctorDetailsProvider extends ChangeNotifier {
-  Map<String, dynamic>? _userDetailsMap;
-  Map<String, dynamic> get getUserDetailsMap => _userDetailsMap!;
+  Map<String, dynamic>? _DoctorDetailsMap;
+  Map<String, dynamic> get getDoctorDetailsMap => _DoctorDetailsMap!;
 
   getDoctordetails() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final userDetailsSnap = await _firestore
+    final DoctorDetailsSnap = await _firestore
         .collection("Doctors")
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .get();
-    _userDetailsMap = userDetailsSnap.data() as Map<String, dynamic>;
+    _DoctorDetailsMap = DoctorDetailsSnap.data() as Map<String, dynamic>;
     notifyListeners();
   }
 }

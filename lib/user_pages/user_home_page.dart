@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swasthya_setu/providers/details.dart';
+import 'package:swasthya_setu/user_pages/user_profile.dart';
 import 'package:swasthya_setu/widgets/addresswidget.dart';
 
-class UserHomePage extends StatelessWidget {
+class UserHomePage extends StatefulWidget {
   final Size size;
   const UserHomePage({super.key, required this.size});
 
   @override
-  Widget build(BuildContext context) {
+  State<UserHomePage> createState() => _UserHomePageState();
+}
+
+class _UserHomePageState extends State<UserHomePage> {
+  @override
+  void initState() {
+    super.initState();
     context.read<UserDetailsProvider>().getUserdetails();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     Map<String, dynamic> userDetailsMap =
         Provider.of<UserDetailsProvider>(context, listen: true)
             .getUserDetailsMap;
@@ -21,31 +32,49 @@ class UserHomePage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: size.height * 0.2,
+              height: widget.size.height * 0.2,
               width: double.maxFinite,
               // color: maingreen,
               child: Padding(
                   padding: const EdgeInsets.all(5),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage("${userDetailsMap['photoURL']}"),
-                        radius: size.width * 0.25,
+                      IconButton(
+                        icon: CircleAvatar(
+                          backgroundImage:
+                              NetworkImage("${userDetailsMap?['photoURL']}"),
+                          radius: widget.size.width * 0.25,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((context) => UserProfilePage(
+                                  size: widget.size,
+                                  name: userDetailsMap['name'],
+                                  number: userDetailsMap['number'],
+                                  age: userDetailsMap['age'],
+                                  image: userDetailsMap['photoURL'],
+                                  gender: userDetailsMap['gender'],
+                                  mail: userDetailsMap['email'],
+                                  address: userDetailsMap['address']))));
+                        },
                       ),
                       SizedBox(
-                        width: size.width * 0.4,
+                        width: widget.size.width * 0.35,
                         child: Column(
                           children: [
                             Text(
-                              "${userDetailsMap['name']}",
+                              "${userDetailsMap?['name']}",
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 30),softWrap: true,
+                                  fontWeight: FontWeight.bold, fontSize: 30),
+                              softWrap: true,
                             ),
-                          SizedBox(height: size.height*0.02,),
+                            SizedBox(
+                              height: widget.size.height * 0.01,
+                            ),
                             const Text(
                               "Current Location",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                                  fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             const AddressText(),
                           ],
@@ -55,21 +84,19 @@ class UserHomePage extends StatelessWidget {
                   )),
             ),
             SizedBox(
-              height: size.height * 0.02,
+              height: widget.size.height * 0.02,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
-                  onTap: ()  {
-                
-                  },
+                  onTap: () {},
                   child: Card(
                     color: Colors.orange,
                     shape: const RoundedRectangleBorder(),
                     child: SizedBox(
-                      height: size.height * 0.05,
-                      width: size.width * 0.4,
+                      height: widget.size.height * 0.05,
+                      width: widget.size.width * 0.4,
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -84,21 +111,28 @@ class UserHomePage extends StatelessWidget {
                   color: Colors.orange,
                   shape: const RoundedRectangleBorder(),
                   child: SizedBox(
-                    height: size.height * 0.05,
-                    width: size.width * 0.4,
-                    child:  const Row(
+                    height: widget.size.height * 0.05,
+                    width: widget.size.width * 0.4,
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.apps_outage_outlined),
-                        Text("Appointments",)
+                        Text(
+                          "Appointments",
+                        )
                       ],
                     ),
                   ),
                 )
               ],
             ),
-             SizedBox(height: size.height*0.02,),
-             SearchBar(backgroundColor: MaterialStatePropertyAll(Colors.grey.shade200),leading: Icon(Icons.admin_panel_settings_outlined),)
+            SizedBox(
+              height: widget.size.height * 0.02,
+            ),
+            SearchBar(
+              backgroundColor: MaterialStatePropertyAll(Colors.grey.shade200),
+              leading: Icon(Icons.admin_panel_settings_outlined),
+            )
           ],
         ),
       ),

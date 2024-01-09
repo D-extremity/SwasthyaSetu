@@ -83,15 +83,15 @@ class _LoginPageState extends State<LoginPage> {
                             if (isLoggedin == "User") {
                               //! get type if type==user then show user ui otherwise show doctor ui
                               
-                              Navigator.of(context).pushReplacement(
+                              Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          UserHomePage(size: size)));
+                                          UserHomePage(size: size)),(Route<dynamic> route) => false);
                             } else if (isLoggedin == "Doctor") {
-                              Navigator.of(context).pushReplacement(
+                              Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          DoctorHomePage(size: size)));
+                                          DoctorHomePage(size: size)),(Route<dynamic> route) => false);
                             }
                           }
                         },
