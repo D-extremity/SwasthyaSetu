@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/getlocation.dart';
 
 class AddressText extends StatefulWidget {
@@ -27,35 +27,29 @@ class _AddressTextState extends State<AddressText> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Row(children: [
-          const Text("Refresh"),
-          IconButton(
-            icon: const Icon(
-              Icons.refresh,
-              color: maingreen,
-            ),
-            onPressed: () async {
-              // String add = await getLocation();
-              _location = await getLocation();
-              if (_location.substring(0, 9) == "Throttled") {
-                _location = "Please Refresh ";
-              }
-              print(_location);
-              setState(() {
-                // _location = add;
-              });
-            },
+    return Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+      SizedBox(
+        height: 20,
+        child: ElevatedButton(
+           child: const Text("Locate Again"),
+           style: ElevatedButton.styleFrom(shape: BeveledRectangleBorder()),
+           onPressed: () async {
+             // String add = await getLocation();
+             _location = await getLocation();
+             if (_location.substring(0, 9) == "Throttled") {
+               _location = "Please Refresh ";
+             }
+             // print(_location);
+             setState(() {
+               // _location = add;
+             });
+           }),
+      ),
+          Text(
+       _location,
+       softWrap: true,
+       style: const TextStyle(color: Colors.blue, fontSize: 12),
           )
-        ]),
-        Text(
-          _location,
-          softWrap: true,
-          style: TextStyle(color: Colors.blue, fontSize: 10),
-        ),
-      ],
-    );
+    ]);
   }
 }

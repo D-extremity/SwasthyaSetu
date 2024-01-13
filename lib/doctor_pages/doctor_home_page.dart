@@ -70,33 +70,51 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
         child: Column(
           children: [
             SizedBox(
-              height: widget.size.height * 0.2,
+              height: widget.size.height * 0.03,
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                child: const Text("Refresh"),
+                style:
+                    ElevatedButton.styleFrom(shape: BeveledRectangleBorder()),
+              ),
+            ),
+            SizedBox(
+              height: widget.size.height * 0.23,
               width: double.maxFinite,
               child: Padding(
                   padding: const EdgeInsets.all(5),
                   child: Row(
                     children: [
-                      IconButton(
-                        icon: CircleAvatar(
-                          backgroundImage:
-                              NetworkImage("${userDetailsMap['photoURL']}"),
-                          radius: widget.size.width * 0.25,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: ((context) => UserProfilePage(
-                                  size: widget.size,
-                                  name: userDetailsMap['name'],
-                                  number: userDetailsMap['number'],
-                                  age: userDetailsMap['age'],
-                                  image: userDetailsMap['photoURL'],
-                                  gender: userDetailsMap['gender'],
-                                  mail: userDetailsMap['email'],
-                                  address: userDetailsMap['address']))));
-                        },
+                      Column(
+                        children: [
+                          IconButton(
+                            icon: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage("${userDetailsMap['photoURL']}"),
+                              radius: widget.size.width * 0.2,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: ((context) => UserProfilePage(
+                                      size: widget.size,
+                                      name: userDetailsMap['name'],
+                                      number: userDetailsMap['number'],
+                                      age: userDetailsMap['age'],
+                                      image: userDetailsMap['photoURL'],
+                                      gender: userDetailsMap['gender'],
+                                      mail: userDetailsMap['email'],
+                                      address: userDetailsMap['address']))));
+                            },
+                          ),
+                          SizedBox(
+                            height: widget.size.height * 0.002,
+                          ),
+                        ],
                       ),
                       SizedBox(
-                        width: widget.size.width * 0.35,
+                        width: widget.size.width * 0.4,
                         child: Column(
                           children: [
                             Text(
@@ -105,23 +123,32 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                   fontWeight: FontWeight.bold, fontSize: 30),
                               softWrap: true,
                             ),
+                            Text(
+                              "${userDetailsMap['specialization']}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 12),
+                            ),
                             SizedBox(
                               height: widget.size.height * 0.01,
                             ),
                             const Text(
-                              "Current Location",
+                              "Clinic Location",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),
-                            const AddressText(),
+                            SizedBox(
+                              height: widget.size.height * 0.01,
+                            ),
+                            Text(
+                              "${userDetailsMap['address']}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 12),
+                            ),
                           ],
                         ),
                       )
                     ],
                   )),
-            ),
-            SizedBox(
-              height: widget.size.height * 0.02,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -148,7 +175,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                   ),
                 ),
                 Card(
-                  color: Colors.orange,
+                  color: Colors.red,
                   shape: const RoundedRectangleBorder(),
                   child: SizedBox(
                     height: widget.size.height * 0.05,
@@ -380,7 +407,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                     setState(() {
                                       open = openTime;
                                       close = closeTime;
-                                      print("line 364 runned step 1");
+                                      // print("line 364 runned step 1");
                                     });
                                     Navigator.of(context).pop();
                                   } else {
