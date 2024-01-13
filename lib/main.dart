@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.hasData) {
               User getData = snapshot.data as User;
               if (getData.displayName == "User") {
-              
+                
+
                 return UserHomePage(
                   size: size,
                 );

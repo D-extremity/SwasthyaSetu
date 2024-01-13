@@ -42,7 +42,7 @@ class _UserHomePageState extends State<UserHomePage> {
                       IconButton(
                         icon: CircleAvatar(
                           backgroundImage:
-                              NetworkImage("${userDetailsMap?['photoURL']}"),
+                              NetworkImage("${userDetailsMap['photoURL']}"),
                           radius: widget.size.width * 0.25,
                         ),
                         onPressed: () {
@@ -63,7 +63,7 @@ class _UserHomePageState extends State<UserHomePage> {
                         child: Column(
                           children: [
                             Text(
-                              "${userDetailsMap?['name']}",
+                              "${userDetailsMap['name']}",
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30),
                               softWrap: true,

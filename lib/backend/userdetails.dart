@@ -42,7 +42,9 @@ class DoctorDetails {
       "password": password,
       "specialization": specializations,
       "type": type,
-      "number": number
+      "number": number,
+      "open":"Nill",
+      "close":"Nill"
     };
   }
 }

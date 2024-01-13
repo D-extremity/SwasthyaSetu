@@ -30,5 +30,5 @@ Future<String> getLocation() async {
   );
   // print(address);
   // print(address.region);
-  return "${address.city},${address.region}";
+  return  "${address.city},${address.region}";
 }

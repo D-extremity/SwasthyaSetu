@@ -13,6 +13,9 @@ class _AddressTextState extends State<AddressText> {
   String _location = "Loading...";
   getAddress(BuildContext context) async {
     _location = await getLocation();
+    if (_location.substring(0, 9) == "Throttled") {
+      _location = "Please Refresh ";
+    }
     setState(() {});
   }
 
@@ -28,16 +31,21 @@ class _AddressTextState extends State<AddressText> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Row(children: [
-          Text("Refresh"),
+          const Text("Refresh"),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.refresh,
               color: maingreen,
             ),
             onPressed: () async {
-              String add = await getLocation();
+              // String add = await getLocation();
+              _location = await getLocation();
+              if (_location.substring(0, 9) == "Throttled") {
+                _location = "Please Refresh ";
+              }
+              print(_location);
               setState(() {
-                _location = add;
+                // _location = add;
               });
             },
           )

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:swasthya_setu/doctor_pages/doctor_home_page.dart';
 
 // import 'package:swasthya_setu/pages/signin_as_doctor.dart';
 
@@ -32,12 +33,42 @@ class _GetCheckBoxState extends State<GetCheckBox> {
               } else if (value == false) {
                 widget.specializations.remove(widget.name);
               }
-              print(widget.specializations);
+              // print(widget.specializations);
               setState(() {
                 widget.isName = value;
               });
             }),
       ],
     );
+  }
+}
+
+
+
+
+class IsLiveCheckBox extends StatefulWidget {
+  const IsLiveCheckBox({super.key});
+
+  @override
+  State<IsLiveCheckBox> createState() => _IsLiveCheckBoxState();
+}
+
+class _IsLiveCheckBoxState extends State<IsLiveCheckBox> {
+  @override
+  Widget build(BuildContext context) {
+    return   Row(children: [
+                                Checkbox(
+                                    value: isLive,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        isLive = value;
+                                        // print(isLive);
+                                      });
+                                    }),
+                                const Text(
+                                  "My Clinic will get Live \nat my scheduled time.",
+                                  softWrap: true,
+                                ),
+                              ]);
   }
 }
