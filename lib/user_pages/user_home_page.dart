@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swasthya_setu/providers/details.dart';
 import 'package:swasthya_setu/user_pages/user_profile.dart';
+import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/widgets/addresswidget.dart';
+import 'package:swasthya_setu/widgets/doctorcard.dart';
 
 class UserHomePage extends StatefulWidget {
   final Size size;
@@ -132,7 +134,19 @@ class _UserHomePageState extends State<UserHomePage> {
             SearchBar(
               backgroundColor: MaterialStatePropertyAll(Colors.grey.shade200),
               leading: Icon(Icons.admin_panel_settings_outlined),
-            )
+            ),
+            SizedBox(
+              height: widget.size.height * 0.002,
+            ),
+            Expanded(
+                child: ListView(
+              children: [
+                DoctorCard(size: widget.size),
+                DoctorCard(size: widget.size),
+                DoctorCard(size: widget.size),
+                DoctorCard(size: widget.size),
+              ],
+            ))
           ],
         ),
       ),
