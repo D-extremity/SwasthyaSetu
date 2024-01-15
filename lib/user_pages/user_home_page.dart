@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:swasthya_setu/providers/details.dart';
 import 'package:swasthya_setu/user_pages/user_profile.dart';
 import 'package:swasthya_setu/utils/colours.dart';
+import 'package:swasthya_setu/widgets/active_doctors.dart';
 import 'package:swasthya_setu/widgets/addresswidget.dart';
 import 'package:swasthya_setu/widgets/doctorcard.dart';
 
@@ -139,14 +140,7 @@ class _UserHomePageState extends State<UserHomePage> {
               height: widget.size.height * 0.002,
             ),
             Expanded(
-                child: ListView(
-              children: [
-                DoctorCard(size: widget.size),
-                DoctorCard(size: widget.size),
-                DoctorCard(size: widget.size),
-                DoctorCard(size: widget.size),
-              ],
-            ))
+                child: ActiveDoctorList(size: widget.size))
           ],
         ),
       ),

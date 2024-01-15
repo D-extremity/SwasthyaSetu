@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/toast.dart';
 
+final FirebaseFirestore _firebasefirestore = FirebaseFirestore.instance;
+
 class Appointments {
   Map<String, dynamic> doctorDetails;
   final BuildContext context;
   Appointments(this.doctorDetails, this.context);
-  final FirebaseFirestore _firebasefirestore = FirebaseFirestore.instance;
   Future<bool> goActive(DateTime open, DateTime close) async {
     try {
       doctorDetails.addAll({"open": open, "close": close});
       await _firebasefirestore
-        .collection("Doctors")
-        .doc(doctorDetails['uid'])
-        .set(doctorDetails);
+          .collection("Doctors")
+          .doc(doctorDetails['uid'])
+          .set(doctorDetails);
       await _firebasefirestore
           .collection("Active_Doctors")
           .doc(doctorDetails['uid'])
@@ -29,4 +30,8 @@ class Appointments {
       return false;
     }
   }
+}
+
+Stream<QuerySnapshot> activeDoctors() {
+  return  _firebasefirestore.collection("Active_Doctors").snapshots();
 }
