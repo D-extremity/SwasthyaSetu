@@ -14,24 +14,29 @@ class SignInOptionPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           backgroundColor: maingreen,
-          appBar: AppBar(
+          /*appBar: AppBar(
             centerTitle: true,
             backgroundColor: maingreen,
             title: Text(
               "Swasthya Setu",
               style: TextStyle(
-                  color: mainwhite,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Dosis-Bold',
                   fontSize: size.height * 0.05),
             ),
-          ),
+          ),*/
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Lottie.asset("assets/medical.json"),
-                SizedBox(
-                  height: size.height * 0.05,
+                Text("Swasthya Setu",style: TextStyle(color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Dosis-Bold',
+                    fontSize: size.height * 0.05),
+                ),
+                Center(
+                  child: Lottie.asset("assets/medical.json"),
                 ),
                 CupertinoButton(
                   onPressed: () {
@@ -41,7 +46,7 @@ class SignInOptionPage extends StatelessWidget {
                   color: mainwhite,
                   child: const Text(
                     "I'm Doctor",
-                    style: TextStyle(color: maingreen),
+                    style: TextStyle(color: maingreen,fontSize: 30),
                   ),
                 ),
                 SizedBox(
@@ -54,8 +59,8 @@ class SignInOptionPage extends StatelessWidget {
                   },
                   color: mainwhite,
                   child: const Text(
-                    "  I'm User  ",
-                    style: TextStyle(color: maingreen),
+                    "I'm User ",
+                    style: TextStyle(color: maingreen,fontSize: 30,fontFamily: 'Dosis-Bold'),
                   ),
                 ),
               ],

@@ -41,7 +41,7 @@ class _SigninUserPageState extends State<SigninUserPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: const Color.fromARGB(255, 199, 215, 180),
+      backgroundColor: Colors.white,
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
         return Center(
@@ -58,9 +58,10 @@ class _SigninUserPageState extends State<SigninUserPage> {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     child: const Text(
-                      "Already Have Account Click Here",
-                      style: TextStyle(color: Colors.blue),
-                    )),
+                      "Already Have an Account?   Click Here",
+                      style: TextStyle(color: Colors.orange,fontSize: 20,fontFamily: 'Dosis-Regular'),
+                    ),
+                    ),
                 SizedBox(
                   height: constraints.maxHeight * 0.02,
                 ),
@@ -186,8 +187,8 @@ class _SigninUserPageState extends State<SigninUserPage> {
                                 .signUpWithEmail(image);
                           }
                         },
-                        color: maingreen,
-                        child: const Text("Sign Up"),
+                        color: Colors.orange,
+                        child: const Text("Sign Up",style: TextStyle(color:Colors.white),),
                       ),
                     ],
                   ),
