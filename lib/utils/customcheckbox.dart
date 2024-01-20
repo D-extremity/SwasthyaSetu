@@ -4,6 +4,7 @@ import 'package:swasthya_setu/doctor_pages/doctor_home_page.dart';
 
 // import 'package:swasthya_setu/pages/signin_as_doctor.dart';
 
+// ignore: must_be_immutable
 class GetCheckBox extends StatefulWidget {
   bool? isName;
   String name;

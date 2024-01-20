@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DoctorAddress extends StatelessWidget {
@@ -7,10 +8,15 @@ class DoctorAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(address,
-        maxLines: 4,
-        softWrap: true,
-        style: TextStyle(
-            fontSize: size.width / 30, fontWeight: FontWeight.w400));
+    return Column(
+      children: [
+        Text(address,
+            maxLines: 2,
+            softWrap: true,
+            // overflow: TextOverflow.fade,
+            style: TextStyle(
+                fontSize: size.width / 30, fontWeight: FontWeight.w400)),
+      ],
+    );
   }
 }

@@ -161,6 +161,8 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
                     open: getDateTimeText(
                         (doctorInfo['open'] as Timestamp).toDate()),
                     qualification: doctorInfo['qualification'],
+                    doctorUID: doctorInfo['uid'],
+                    doctorInfo: doctorInfo,
                   )));
         },
         child: Expanded(
@@ -223,7 +225,7 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
                     Column(
                       children: [
                         DoctorAddress(
-                            address: doctorInfo['address'], size: size),
+                            address: doctorInfo['address'].toString(), size: size),
                         // Text(
                         //     "Patel Nagar 2 , Chaudhary Chabbil Das \nCharitable Trust",
                         //     maxLines: 4,

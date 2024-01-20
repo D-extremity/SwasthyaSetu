@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swasthya_setu/pages/historyappointments.dart';
 import 'package:swasthya_setu/providers/details.dart';
 import 'package:swasthya_setu/user_pages/user_profile.dart';
-import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/widgets/active_doctors.dart';
 import 'package:swasthya_setu/widgets/addresswidget.dart';
-import 'package:swasthya_setu/widgets/doctorcard.dart';
 
 class UserHomePage extends StatefulWidget {
   final Size size;
@@ -95,6 +94,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 GestureDetector(
                   onTap: () {},
                   child: Card(
+                    elevation: 10,
                     color: Colors.orange,
                     shape: const RoundedRectangleBorder(),
                     child: SizedBox(
@@ -110,20 +110,27 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                   ),
                 ),
-                Card(
-                  color: Colors.orange,
-                  shape: const RoundedRectangleBorder(),
-                  child: SizedBox(
-                    height: widget.size.height * 0.05,
-                    width: widget.size.width * 0.4,
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.apps_outage_outlined),
-                        Text(
-                          "Appointments",
-                        )
-                      ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AppointmentHistory(userUid:userDetailsMap['uid'])));
+                  },
+                  child: Card(
+                    color: Colors.orange,
+                    elevation: 10,
+                    shape: const RoundedRectangleBorder(),
+                    child: SizedBox(
+                      height: widget.size.height * 0.05,
+                      width: widget.size.width * 0.4,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.apps_outage_outlined),
+                          Text(
+                            "Appointments",
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -139,8 +146,7 @@ class _UserHomePageState extends State<UserHomePage> {
             SizedBox(
               height: widget.size.height * 0.002,
             ),
-            Expanded(
-                child: ActiveDoctorList(size: widget.size))
+            Expanded(child: ActiveDoctorList(size: widget.size))
           ],
         ),
       ),

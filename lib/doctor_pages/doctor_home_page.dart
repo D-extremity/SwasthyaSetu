@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:swasthya_setu/backend/appointment.dart';
+import 'package:swasthya_setu/doctor_pages/scheduledappointments.dart';
 import 'package:swasthya_setu/providers/details.dart';
 import 'package:swasthya_setu/user_pages/user_profile.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/customcheckbox.dart';
 import 'package:swasthya_setu/utils/gettime.dart';
-import 'package:swasthya_setu/widgets/addresswidget.dart';
 
 class DoctorHomePage extends StatefulWidget {
   final Size size;
@@ -400,9 +400,9 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                   opendatetime = _opendateTime!;
                                   closedatetime = _closedateTime!;
                                   bool isActive = await Appointments(
-                                          userDetailsMap, context)
+                                           context)
                                       .goActive(
-                                          _opendateTime!, _closedateTime!);
+                                          _opendateTime!, _closedateTime!,userDetailsMap);
                                   if (isActive) {
                                     setState(() {
                                       open = openTime;
@@ -452,8 +452,10 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
               ),
             ),
             SizedBox(
-              height: widget.size.height * 0.02,
+              height: widget.size.height * 0.01
             ),
+            Text("Scheduled Appointments"),
+            ScheduledAppointments(docUid: userDetailsMap['uid'],size: widget.size,)
           ],
         ),
       ),
