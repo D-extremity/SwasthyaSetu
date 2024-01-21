@@ -5,10 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:swasthya_setu/backend/appointment.dart';
 import 'package:swasthya_setu/doctor_pages/scheduledappointments.dart';
 import 'package:swasthya_setu/providers/details.dart';
-import 'package:swasthya_setu/user_pages/user_profile.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/customcheckbox.dart';
 import 'package:swasthya_setu/utils/gettime.dart';
+import 'package:swasthya_setu/widgets/sidebar_doctor.dart';
+
+import '../widgets/sidebar.dart';
+import 'doctor_profile_page.dart';
 
 class DoctorHomePage extends StatefulWidget {
   final Size size;
@@ -65,6 +68,21 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
 
     return SafeArea(
         child: Scaffold(
+          drawer: SidebarDoctor(size: widget.size),
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: Text(
+              "Home Page",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                fontFamily: 'Dosis',
+              ),
+            ),
+            centerTitle: true,
+            backgroundColor: maingreen,
+          ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -81,7 +99,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
               ),
             ),
             SizedBox(
-              height: widget.size.height * 0.23,
+              height: widget.size.height * 0.1,
               width: double.maxFinite,
               child: Padding(
                   padding: const EdgeInsets.all(5),
@@ -89,7 +107,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     children: [
                       Column(
                         children: [
-                          IconButton(
+                          /*IconButton(
                             icon: CircleAvatar(
                               backgroundImage:
                                   NetworkImage("${userDetailsMap['photoURL']}"),
@@ -97,7 +115,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                             ),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: ((context) => UserProfilePage(
+                                  builder: ((context) => DoctorProfilePage(
                                       size: widget.size,
                                       name: userDetailsMap['name'],
                                       number: userDetailsMap['number'],
@@ -107,27 +125,27 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                       mail: userDetailsMap['email'],
                                       address: userDetailsMap['address']))));
                             },
-                          ),
+                          ),*/
                           SizedBox(
                             height: widget.size.height * 0.002,
                           ),
                         ],
                       ),
                       SizedBox(
-                        width: widget.size.width * 0.4,
+                        width: widget.size.width * 0.9,
                         child: Column(
                           children: [
-                            Text(
+                            /*Text(
                               "${userDetailsMap['name']}",
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30),
                               softWrap: true,
-                            ),
-                            Text(
+                            ),*/
+                            /*Text(
                               "${userDetailsMap['specialization']}",
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
+                            ),*/
                             SizedBox(
                               height: widget.size.height * 0.01,
                             ),
@@ -201,252 +219,254 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
               message,
               style: TextStyle(color: Colors.blue),
             ),
-            GestureDetector(
-              onTap: () {
-                DateTime? _opendateTime = opendatetime;
-                DateTime? _closedateTime = closedatetime;
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          content: SizedBox(
-                            height: widget.size.height * 0.4,
-                            child: Column(
-                              children: [
-                                Container(
-                                    color: maingreen,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: widget.size.height * 0.02,
-                                        ),
-                                        Text(
-                                          "OPENING TIME :",
-                                          style: TextStyle(
-                                              fontSize:
-                                                  widget.size.width * 0.05),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                shape:
-                                                    const BeveledRectangleBorder()),
-                                            onPressed: () async {
-                                              _opendateTime =
-                                                  await showOmniDateTimePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1600)
-                                                    .subtract(const Duration(
-                                                        days: 3652)),
-                                                lastDate: DateTime.now().add(
-                                                  const Duration(days: 3652),
-                                                ),
-                                                is24HourMode: false,
-                                                isShowSeconds: false,
-                                                minutesInterval: 1,
-                                                secondsInterval: 1,
-                                                isForce2Digits: true,
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(16)),
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 350,
-                                                  maxHeight: 650,
-                                                ),
-                                                transitionBuilder: (context,
-                                                    anim1, anim2, child) {
-                                                  return FadeTransition(
-                                                    opacity: anim1.drive(
-                                                      Tween(
-                                                        begin: 0,
-                                                        end: 1,
-                                                      ),
-                                                    ),
-                                                    child: child,
-                                                  );
-                                                },
-                                                transitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 200),
-                                                barrierDismissible: true,
-                                              );
-
-                                              // print("dateTime: $_opendateTime");
-                                            },
-                                            child:
-                                                const Text("SET OPENING TIME"),
+            SingleChildScrollView(
+              child: GestureDetector(
+                onTap: () {
+                  DateTime? _opendateTime = opendatetime;
+                  DateTime? _closedateTime = closedatetime;
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            content: SizedBox(
+                              height: widget.size.height * 0.4,
+                              child: Column(
+                                children: [
+                                  Container(
+                                      color: maingreen,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: widget.size.height * 0.02,
                                           ),
-                                          //  Text( "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}")),
-                                        )
-                                      ],
-                                    )),
-                                SizedBox(
-                                  height: widget.size.height * 0.04,
-                                ),
-                                Container(
-                                    color: Colors.orange,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: widget.size.height * 0.02,
-                                        ),
-                                        Text(
-                                          "CLOSING TIME :",
-                                          style: TextStyle(
-                                              fontSize:
-                                                  widget.size.width * 0.05),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                shape:
-                                                    const BeveledRectangleBorder()),
-                                            onPressed: () async {
-                                              _closedateTime =
-                                                  await showOmniDateTimePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1600)
-                                                    .subtract(const Duration(
-                                                        days: 3652)),
-                                                lastDate: DateTime.now().add(
-                                                  const Duration(days: 3652),
-                                                ),
-                                                is24HourMode: false,
-                                                isShowSeconds: false,
-                                                minutesInterval: 1,
-                                                secondsInterval: 1,
-                                                isForce2Digits: true,
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(16)),
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  maxWidth: 350,
-                                                  maxHeight: 650,
-                                                ),
-                                                transitionBuilder: (context,
-                                                    anim1, anim2, child) {
-                                                  return FadeTransition(
-                                                    opacity: anim1.drive(
-                                                      Tween(
-                                                        begin: 0,
-                                                        end: 1,
-                                                      ),
-                                                    ),
-                                                    child: child,
-                                                  );
-                                                },
-                                                transitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 200),
-                                                barrierDismissible: true,
-                                              );
-
-                                              // print("dateTime: $_opendateTime");
-                                            },
-                                            child:
-                                                const Text("SET CLOSING TIME"),
+                                          Text(
+                                            "OPENING TIME :",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    widget.size.width * 0.05),
                                           ),
-                                          //  Text( "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}")),
-                                        )
-                                      ],
-                                    )),
-                                SizedBox(
-                                  height: widget.size.height * 0.04,
-                                ),
-                                const IsLiveCheckBox(),
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red),
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(color: Colors.black),
+                                          Padding(
+                                            padding: const EdgeInsets.all(11),
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  shape:
+                                                      const BeveledRectangleBorder()),
+                                              onPressed: () async {
+                                                _opendateTime =
+                                                    await showOmniDateTimePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1600)
+                                                      .subtract(const Duration(
+                                                          days: 3652)),
+                                                  lastDate: DateTime.now().add(
+                                                    const Duration(days: 3652),
+                                                  ),
+                                                  is24HourMode: false,
+                                                  isShowSeconds: false,
+                                                  minutesInterval: 1,
+                                                  secondsInterval: 1,
+                                                  isForce2Digits: true,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(16)),
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                    maxWidth: 350,
+                                                    maxHeight: 650,
+                                                  ),
+                                                  transitionBuilder: (context,
+                                                      anim1, anim2, child) {
+                                                    return FadeTransition(
+                                                      opacity: anim1.drive(
+                                                        Tween(
+                                                          begin: 0,
+                                                          end: 1,
+                                                        ),
+                                                      ),
+                                                      child: child,
+                                                    );
+                                                  },
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 200),
+                                                  barrierDismissible: true,
+                                                );
+              
+                                                // print("dateTime: $_opendateTime");
+                                              },
+                                              child:
+                                                  const Text("SET OPENING TIME"),
+                                            ),
+                                            //  Text( "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}")),
+                                          )
+                                        ],
+                                      )),
+                                  SizedBox(
+                                    height: widget.size.height * 0.04,
+                                  ),
+                                  Container(
+                                      color: Colors.orange,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: widget.size.height * 0.02,
+                                          ),
+                                          Text(
+                                            "CLOSING TIME :",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    widget.size.width * 0.05),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8),
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  shape:
+                                                      const BeveledRectangleBorder()),
+                                              onPressed: () async {
+                                                _closedateTime =
+                                                    await showOmniDateTimePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1600)
+                                                      .subtract(const Duration(
+                                                          days: 3652)),
+                                                  lastDate: DateTime.now().add(
+                                                    const Duration(days: 3652),
+                                                  ),
+                                                  is24HourMode: false,
+                                                  isShowSeconds: false,
+                                                  minutesInterval: 1,
+                                                  secondsInterval: 1,
+                                                  isForce2Digits: true,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(16)),
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                    maxWidth: 350,
+                                                    maxHeight: 650,
+                                                  ),
+                                                  transitionBuilder: (context,
+                                                      anim1, anim2, child) {
+                                                    return FadeTransition(
+                                                      opacity: anim1.drive(
+                                                        Tween(
+                                                          begin: 0,
+                                                          end: 1,
+                                                        ),
+                                                      ),
+                                                      child: child,
+                                                    );
+                                                  },
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 200),
+                                                  barrierDismissible: true,
+                                                );
+              
+                                                // print("dateTime: $_opendateTime");
+                                              },
+                                              child:
+                                                  const Text("SET CLOSING TIME"),
+                                            ),
+                                            //  Text( "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}")),
+                                          )
+                                        ],
+                                      )),
+                                  SizedBox(
+                                    height: widget.size.height * 0.02,
+                                  ),
+                                  const IsLiveCheckBox(),
+                                ],
                               ),
                             ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (isLive == false) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text("Please Check the Box"),
-                                    backgroundColor: Colors.red,
-                                  ));
-                                } else if (_opendateTime != null &&
-                                    _closedateTime != null &&
-                                    (_opendateTime?.compareTo(DateTime.now()) ==
-                                            0 ||
-                                        _opendateTime
-                                                ?.compareTo(DateTime.now()) ==
-                                            1) &&
-                                    _closedateTime?.compareTo(DateTime.now()) ==
-                                        1 &&
-                                    _closedateTime?.compareTo(_opendateTime!) ==
-                                        1) {
-                                  String openTime =
-                                      "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}    ";
-                                  String closeTime =
-                                      "Date: ${_closedateTime!.day}/${_closedateTime!.month} Time: ${_closedateTime!.hour}:${_closedateTime!.minute}    ";
-                                  opendatetime = _opendateTime!;
-                                  closedatetime = _closedateTime!;
-                                  bool isActive = await Appointments(
-                                           context)
-                                      .goActive(
-                                          _opendateTime!, _closedateTime!,userDetailsMap);
-                                  if (isActive) {
-                                    setState(() {
-                                      open = openTime;
-                                      close = closeTime;
-                                      // print("line 364 runned step 1");
-                                    });
-                                    Navigator.of(context).pop();
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red),
+                                child: const Text(
+                                  "Cancel",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  if (isLive == false) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text("Please Check the Box"),
+                                      backgroundColor: Colors.red,
+                                    ));
+                                  } else if (_opendateTime != null &&
+                                      _closedateTime != null &&
+                                      (_opendateTime?.compareTo(DateTime.now()) ==
+                                              0 ||
+                                          _opendateTime
+                                                  ?.compareTo(DateTime.now()) ==
+                                              1) &&
+                                      _closedateTime?.compareTo(DateTime.now()) ==
+                                          1 &&
+                                      _closedateTime?.compareTo(_opendateTime!) ==
+                                          1) {
+                                    String openTime =
+                                        "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}    ";
+                                    String closeTime =
+                                        "Date: ${_closedateTime!.day}/${_closedateTime!.month} Time: ${_closedateTime!.hour}:${_closedateTime!.minute}    ";
+                                    opendatetime = _opendateTime!;
+                                    closedatetime = _closedateTime!;
+                                    bool isActive = await Appointments(
+                                             context)
+                                        .goActive(
+                                            _opendateTime!, _closedateTime!,userDetailsMap);
+                                    if (isActive) {
+                                      setState(() {
+                                        open = openTime;
+                                        close = closeTime;
+                                        // print("line 364 runned step 1");
+                                      });
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      Navigator.of(context).pop();
+                                    }
                                   } else {
-                                    Navigator.of(context).pop();
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text(
+                                          "Please Check Your Opening Time and Closing Time"),
+                                      backgroundColor: Colors.red,
+                                    ));
                                   }
-                                } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text(
-                                        "Please Check Your Opening Time and Closing Time"),
-                                    backgroundColor: Colors.red,
-                                  ));
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: maingreen),
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(color: Colors.black),
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: maingreen),
+                                child: const Text(
+                                  "Confirm",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
-                            ),
-                          ],
-                        ));
-              },
-              child: Card(
-                color: Colors.orange,
-                shape: const RoundedRectangleBorder(),
-                child: SizedBox(
-                  height: widget.size.height * 0.05,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.timelapse_sharp),
-                      Text(
-                        "Schedule Appointments",
-                        style: TextStyle(fontSize: widget.size.width * 0.05),
-                      ),
-                    ],
+                            ],
+                          ));
+                },
+                child: Card(
+                  color: Colors.orange,
+                  shape: const RoundedRectangleBorder(),
+                  child: SizedBox(
+                    height: widget.size.height * 0.05,
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.timelapse_sharp),
+                        Text(
+                          "Schedule Appointments",
+                          style: TextStyle(fontSize: widget.size.width * 0.05),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

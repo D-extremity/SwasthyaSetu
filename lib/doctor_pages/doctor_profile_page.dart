@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:swasthya_setu/backend/authorization.dart';
 import 'package:swasthya_setu/utils/customtextfield.dart';
 
-class UserProfilePage extends StatefulWidget {
+class DoctorProfilePage extends StatefulWidget {
   final Size size;
   final String name;
   final String number;
@@ -14,7 +14,7 @@ class UserProfilePage extends StatefulWidget {
   final String mail;
   final String address;
 
-  const UserProfilePage({
+  const DoctorProfilePage({
     Key? key,
     required this.size,
     required this.name,
@@ -27,10 +27,10 @@ class UserProfilePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<UserProfilePage> createState() => _SigninUserProfilePageState();
+  State<DoctorProfilePage> createState() => _SigninUserProfilePageState();
 }
 
-class _SigninUserProfilePageState extends State<UserProfilePage> {
+class _SigninUserProfilePageState extends State<DoctorProfilePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -86,7 +86,7 @@ class _SigninUserProfilePageState extends State<UserProfilePage> {
                             children: [
                               Expanded(
                                 child: getReadTextField(
-                                    "Age",
+                                    "Experience",
                                     constraints.maxHeight * 0.05,
                                     widget.age),
                               ),

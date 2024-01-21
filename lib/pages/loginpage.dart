@@ -31,12 +31,13 @@ class _LoginPageState extends State<LoginPage> {
         title: Text(
           "Swasthya Setu",
           style: TextStyle(
-              color: mainwhite,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: size.height * 0.05),
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 199, 215, 180),
+          //backgroundColor: Colors.teal,
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
         return Center(
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         color: maingreen,
-                        child: const Text("Login"),
+                        child: const Text("Login",style: TextStyle(fontSize: 20),),
                       ),
                     ],
                   ),

@@ -29,9 +29,9 @@ class _AddressTextState extends State<AddressText> {
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.end, children: [
       SizedBox(
-        height: 20,
+        height: 30,
         child: ElevatedButton(
-           child: const Text("Locate Again"),
+           child: const Text("Locate Again",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15,fontFamily: 'DosisRegular',color: Colors.cyan)),
            style: ElevatedButton.styleFrom(shape: BeveledRectangleBorder()),
            onPressed: () async {
              // String add = await getLocation();
@@ -48,7 +48,7 @@ class _AddressTextState extends State<AddressText> {
           Text(
        _location,
        softWrap: true,
-       style: const TextStyle(color: Colors.blue, fontSize: 12),
+       style: const TextStyle(color: Colors.black, fontSize: 25),
           )
     ]);
   }

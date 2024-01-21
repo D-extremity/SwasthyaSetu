@@ -68,7 +68,7 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
                     },
                     child: const Text(
                       "Already Have Account Click Here",
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: maingreen,fontSize: 20,fontFamily: 'Dosis-Regular'),
                     )),
                 SizedBox(
                   height: constraints.maxHeight * 0.02,

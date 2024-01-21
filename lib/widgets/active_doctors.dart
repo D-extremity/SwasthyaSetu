@@ -18,14 +18,16 @@ class ActiveDoctorList extends StatelessWidget {
             child: Text("Loading...\nNetwork is Slow"),
           );
         } else if (snapshot.hasData) {
-          return ListView.builder(
-              itemCount: snapshot.data!.size,
-              itemBuilder: (context, int index) {
-                return snapshot.data!.docs
-                    .map((document) =>
-                        doctorCard( size,  document,context))
-                    .toList()[index];
-              });
+          return Expanded(
+            child: ListView.builder(
+                itemCount: snapshot.data!.size,
+                itemBuilder: (context, int index) {
+                  return snapshot.data!.docs
+                      .map((document) =>
+                          doctorCard( size,  document,context))
+                      .toList()[index];
+                }),
+          );
         } else if (snapshot.hasError) {
           return Center(
             child: Container(

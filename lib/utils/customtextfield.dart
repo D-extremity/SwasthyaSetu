@@ -32,12 +32,16 @@ TextField getTextNumberField(String inputName,double size,TextInputType type ,Te
 
 
 TextField getReadTextField(String inputName,double size,String profileDetail) {
+  TextEditingController controller = TextEditingController(text: profileDetail);
   return TextField(
     readOnly: true,
+    controller: controller,
     cursorHeight: size,
     decoration: InputDecoration(
-        label: Text(profileDetail),
+        //label: Text(profileDetail),
+        label: Text(inputName),
         filled: true,
+        //hintText:inputName,
         hintText: profileDetail,
         focusColor: Colors.grey.shade200,
         fillColor: Colors.grey.shade200,
