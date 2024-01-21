@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swasthya_setu/providers/details.dart';
-
 import 'package:swasthya_setu/user_pages/user_home_page.dart';
 import 'package:swasthya_setu/user_pages/user_profile.dart';
 import 'package:swasthya_setu/utils/colours.dart';
@@ -14,32 +13,32 @@ import 'package:swasthya_setu/widgets/active_doctors.dart';
 import 'package:swasthya_setu/widgets/addresswidget.dart';
 import 'package:swasthya_setu/widgets/doctorcard.dart';
 
-import '../pages/historyappointments.dart';
+import '../doctor_pages/doctor_home_page.dart';
+import '../doctor_pages/doctor_profile_page.dart';
 import '../user_pages/User_Report_Page.dart';
 import 'appointmenthistorywidget.dart';
 
-class Sidebar extends StatefulWidget {
+class SidebarDoctor extends StatefulWidget {
   final Size size;
-  final String userid;
 
-  const Sidebar({Key? key, required this.size,required this.userid}) : super(key: key);
+  const SidebarDoctor({Key? key, required this.size}) : super(key: key);
 
   @override
   _SidebarState createState() => _SidebarState();
 }
 
-class _SidebarState extends State<Sidebar> {
+class _SidebarState extends State<SidebarDoctor> {
   @override
   void initState() {
     super.initState();
-    context.read<UserDetailsProvider>().getUserdetails();
+    context.read<DoctorDetailsProvider>().getDoctordetails();
   }
 
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> userDetailsMap =
-        Provider.of<UserDetailsProvider>(context, listen: true)
-            .getUserDetailsMap;
+        Provider.of<DoctorDetailsProvider>(context, listen: true)
+            .getDoctorDetailsMap;
 
     return Drawer(
       child: Material(
@@ -86,7 +85,7 @@ class _SidebarState extends State<Sidebar> {
           ),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: ((context) => UserProfilePage(
+              builder: ((context) => DoctorProfilePage(
                 size: widget.size,
                 name: userDetailsMap['name'],
                 number: userDetailsMap['number'],
@@ -100,9 +99,19 @@ class _SidebarState extends State<Sidebar> {
           },
         ),
         const SizedBox(width: 20),
-        Text(
-          "${userDetailsMap['name']}",
-          style: TextStyle(color: Colors.black, fontSize: 20),
+        Column(
+          children: [
+            Text(
+              "${userDetailsMap['name']}",
+              style: TextStyle(color: Colors.black, fontSize: 20),
+            ),
+            const SizedBox(width: 20),
+            Text(
+              "${userDetailsMap['specialization']}",
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          ],
         ),
       ],
     );
@@ -116,7 +125,7 @@ class _SidebarState extends State<Sidebar> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => UserHomePage(size: widget.size)));
+                builder: (context) => DoctorHomePage(size: widget.size)));
         break;
       case 1:
         Navigator.push(
@@ -124,16 +133,15 @@ class _SidebarState extends State<Sidebar> {
             MaterialPageRoute(
                 builder: (context) => UserReportPage()));
         break;
-      case 2:
+    /*case 2:
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AppointmentHistory(userUid: widget.userid,)));
-        break;
+                builder: (context) => appointmentHistoryTile(document)));
+        break;*/
       default:
         Navigator.pop(context);
         break;
     }
   }
 }
-

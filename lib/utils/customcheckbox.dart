@@ -4,6 +4,7 @@ import 'package:swasthya_setu/doctor_pages/doctor_home_page.dart';
 
 // import 'package:swasthya_setu/pages/signin_as_doctor.dart';
 
+// ignore: must_be_immutable
 class GetCheckBox extends StatefulWidget {
   bool? isName;
   String name;
@@ -56,19 +57,21 @@ class IsLiveCheckBox extends StatefulWidget {
 class _IsLiveCheckBoxState extends State<IsLiveCheckBox> {
   @override
   Widget build(BuildContext context) {
-    return   Row(children: [
-                                Checkbox(
-                                    value: isLive,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        isLive = value;
-                                        // print(isLive);
-                                      });
-                                    }),
-                                const Text(
-                                  "My Clinic will get Live \nat my scheduled time.",
-                                  softWrap: true,
-                                ),
-                              ]);
+    return   SingleChildScrollView(
+      child: Row(children: [
+                                  Checkbox(
+                                      value: isLive,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          isLive = value;
+                                          // print(isLive);
+                                        });
+                                      }),
+                                  const Text(
+                                    "My Clinic will get Live \nat my scheduled time.",
+                                    softWrap: true,
+                                  ),
+                                ]),
+    );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/colours.dart';
+
 class UserReportPage extends StatefulWidget {
   const UserReportPage ({super.key});
 
@@ -15,7 +17,7 @@ class _State extends State<UserReportPage> {
       appBar: AppBar(
         title: Text("Reports"),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: maingreen,
       ),
     );
   }
