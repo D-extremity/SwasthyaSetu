@@ -59,7 +59,7 @@ class _SigninUserPageState extends State<SigninUserPage> {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     child: const Text(
-                      "Already Have an Account?   Click Here",
+                      "Already Have an Account? Click Here",
                       style: TextStyle(color: maingreen,fontSize: 20,fontFamily: 'Dosis-Regular'),
                     ),
                     ),

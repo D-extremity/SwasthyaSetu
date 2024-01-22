@@ -9,7 +9,7 @@ class Bulletin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.circle_rounded,color: Colors.black87,),
+        const Icon(Icons.circle_rounded,color: Colors.black87,),
         SizedBox(width: size.width*0.03,),
         Text(
           value,

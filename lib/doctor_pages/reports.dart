@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:swasthya_setu/backend/appointment.dart';
-import 'package:swasthya_setu/widgets/appointmenthistorywidget.dart';
+import 'package:swasthya_setu/providers/details.dart';
+import 'package:swasthya_setu/widgets/attendedpatient_tile.dart';
 
-class AppointmentHistory extends StatelessWidget {
+class Reports extends StatelessWidget {
   final String userUid;
-  const AppointmentHistory({super.key, required this.userUid});
+  const Reports({super.key, required this.userUid});
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> userDetailsMap =
+        Provider.of<DoctorDetailsProvider>(context, listen: true)
+            .getDoctorDetailsMap;
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -18,7 +23,7 @@ class AppointmentHistory extends StatelessWidget {
         ),
       ),
       body: StreamBuilder(
-        stream: userAppointmentsHistory(userUid),
+        stream: report(userDetailsMap['uid']),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
           if (snapshot.hasError) {
@@ -35,7 +40,7 @@ class AppointmentHistory extends StatelessWidget {
               itemBuilder: (context, int index) {
                 return snapshot.data!.docs
                     .map((document) =>
-                       appointmentHistoryTile(document))
+                       patientTile(document,MediaQuery.of(context).size,))
                     .toList()[index];
               });
           }

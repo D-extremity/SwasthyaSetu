@@ -49,7 +49,7 @@ class AppointmentBookingPage extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.green.shade50,
           body: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swasthya_setu/utils/getlocation.dart';
 
@@ -31,13 +30,7 @@ class _AddressTextState extends State<AddressText> {
       SizedBox(
         height: 30,
         child: ElevatedButton(
-            child: const Text("Locate Again",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    fontFamily: 'DosisRegular',
-                    color: Colors.cyan)),
-            style: ElevatedButton.styleFrom(shape: BeveledRectangleBorder()),
+            style: ElevatedButton.styleFrom(shape: const BeveledRectangleBorder()),
             onPressed: () async {
               // String add = await getLocation();
               _location = await getLocation();
@@ -46,14 +39,27 @@ class _AddressTextState extends State<AddressText> {
               }
               // print(_location);
               setState(() {
-                // _location = add;
+             
               });
-            }),
+            },
+            child: const Text("Locate Again",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    fontFamily: 'DosisRegular',
+                    color: Colors.cyan))),
       ),
-      Text(
-        _location,
-        softWrap: true,
-        style: const TextStyle(color: Colors.black, fontSize: 25),
+      const SizedBox(height: 8,),
+      Center(
+        child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(4),color: Colors.green.shade100),
+          child: Text(
+          "  $_location ",
+            textAlign: TextAlign.center,
+            softWrap: true,
+            style: const TextStyle(color: Colors.black, fontSize: 15),
+          ),
+        ),
       )
     ]);
   }

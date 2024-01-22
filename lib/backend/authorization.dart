@@ -157,7 +157,7 @@ class LoginMethod {
     try {
       await _auth.signOut();
       Navigator.of(context).pushAndRemoveUntil(
-          CupertinoPageRoute(builder: (context) => SignInOptionPage()),(Route<dynamic> route) => false);
+          CupertinoPageRoute(builder: (context) => const SignInOptionPage()),(Route<dynamic> route) => false);
           getScaffold("Logged Out", context, Colors.green);
     } catch (e) {
       getScaffold("Try After Some Time", context, Colors.red);

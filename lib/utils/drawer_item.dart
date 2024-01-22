@@ -25,7 +25,7 @@ class DrawerItem extends StatelessWidget {
             const SizedBox(width: 16),
             Text(
               name,
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: const TextStyle(fontSize: 16, color: Colors.black),
             ),
           ],
         ),

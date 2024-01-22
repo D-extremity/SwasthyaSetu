@@ -14,7 +14,7 @@ class ActiveDoctorList extends StatelessWidget {
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Text("Loading...\nNetwork is Slow"),
           );
         } else if (snapshot.hasData) {

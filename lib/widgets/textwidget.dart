@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DoctorAddress extends StatelessWidget {
@@ -15,7 +14,7 @@ class DoctorAddress extends StatelessWidget {
             softWrap: true,
             // overflow: TextOverflow.fade,
             style: TextStyle(
-                fontSize: size.width / 30, fontWeight: FontWeight.w400)),
+                fontSize: size.width / 30, fontWeight: FontWeight.w500)),
       ],
     );
   }

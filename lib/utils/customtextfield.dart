@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 // import 'package:swasthya_setu/utils/colours.dart';
 
-TextField getTextField(String inputName,double size,TextEditingController _controller) {
+TextField getTextField(String inputName,double size,TextEditingController controller) {
   return TextField(
     cursorHeight: size,
-    controller: _controller,
+    controller: controller,
     decoration: InputDecoration(
         label: Text(inputName),
         filled: true,
@@ -17,10 +17,10 @@ TextField getTextField(String inputName,double size,TextEditingController _contr
 }
 
 
-TextField getTextNumberField(String inputName,double size,TextInputType type ,TextEditingController _controller) {
+TextField getTextNumberField(String inputName,double size,TextInputType type ,TextEditingController controller) {
   return TextField(keyboardType: type,
     cursorHeight: size,
-    controller: _controller,
+    controller: controller,
     decoration: InputDecoration(
         label: Text(inputName),
         filled: true,

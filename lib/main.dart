@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        routes: {
+          'doctorHomePage':(context) => DoctorHomePage(size: size)
+        },
         theme: ThemeData(useMaterial3: true),
         debugShowCheckedModeBanner: false,
         home: StreamBuilder<User?>(

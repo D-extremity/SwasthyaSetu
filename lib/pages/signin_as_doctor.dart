@@ -67,7 +67,7 @@ class _SigninDoctorPageState extends State<SigninDoctorPage> {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                     child: const Text(
-                      "Already Have Account Click Here",
+                      "Already Have Account? Click Here",
                       style: TextStyle(color: maingreen,fontSize: 20,fontFamily: 'Dosis-Regular'),
                     )),
                 SizedBox(

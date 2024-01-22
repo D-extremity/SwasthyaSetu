@@ -5,8 +5,6 @@ import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/gettime.dart';
 import 'package:swasthya_setu/widgets/textwidget.dart';
 
-
-
 Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
   Map<String, dynamic> doctorInfo = document.data() as Map<String, dynamic>;
 
@@ -46,19 +44,18 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    doctorInfo['name'],
+                    " ${doctorInfo['name']}",
                     style: TextStyle(
                         fontSize: size.width / 20,
                         fontWeight: FontWeight.bold,
-                    fontFamily: 'Dosis-Bold',
-                    color: Colors.white),
+                        fontFamily: 'Dosis-Bold',
+                        color: Colors.black),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Colors.white),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.rectangle, color: Colors.white),
                       child: Text(
                         doctorInfo['age'] + "yr Exp.",
                         style: TextStyle(fontSize: size.width / 30),
@@ -70,13 +67,14 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
               Row(
                 children: [
                   Padding(
-                      padding: EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.only(left: 8),
                       child: Text(
                         "Specializations : ",
                         style: TextStyle(
-                            fontSize: size.width / 25,
-                            fontWeight: FontWeight.w500,
-                        fontFamily: 'Dosis-Regular',),
+                          fontSize: size.width / 25,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Dosis-Regular',
+                        ),
                       )),
                   Text(doctorInfo['specialization'].toString(),
                       style: TextStyle(
@@ -87,7 +85,7 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
               Row(
                 children: [
                   Padding(
-                      padding: EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.only(left: 8),
                       child: Text(
                         "Address : ",
                         style: TextStyle(
@@ -97,8 +95,8 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
                   Column(
                     children: [
                       DoctorAddress(
-                          address: doctorInfo['address'].toString(), size: size),
-                    
+                          address: doctorInfo['address'].toString(),
+                          size: size),
                     ],
                   ),
                 ],
@@ -106,43 +104,46 @@ Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  const SizedBox(
+                    height: 4,
+                  ),
                   Container(
                     color: mainwhite,
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 8),
-                  
+                          padding: const EdgeInsets.only(left: 8),
                           child: Row(
                             children: [
-                          
                               Text(
                                 "OPEN:  ",
                                 style: TextStyle(
-                                    fontSize: size.width / 25,
+                                    fontSize: size.width / 30,
                                     fontWeight: FontWeight.w500),
                               ),
                               DoctorAddress(
                                   address: getDateTimeText(
-                                      (doctorInfo['open'] as Timestamp).toDate()),
+                                      (doctorInfo['open'] as Timestamp)
+                                          .toDate()),
                                   size: size),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(left:8.0,bottom: 4),
                           child: Row(
                             children: [
                               //DoctorAddress(address: "CLOSE :   ", size: size),
                               Text(
                                 "CLOSE:  ",
                                 style: TextStyle(
-                                    fontSize: size.width / 25,
+                                    fontSize: size.width / 30,
                                     fontWeight: FontWeight.w500),
                               ),
                               DoctorAddress(
                                   address: getDateTimeText(
-                                      (doctorInfo['close'] as Timestamp).toDate()),
+                                      (doctorInfo['close'] as Timestamp)
+                                          .toDate()),
                                   size: size),
                             ],
                           ),

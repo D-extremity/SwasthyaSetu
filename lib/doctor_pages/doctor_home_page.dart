@@ -10,9 +10,6 @@ import 'package:swasthya_setu/utils/customcheckbox.dart';
 import 'package:swasthya_setu/utils/gettime.dart';
 import 'package:swasthya_setu/widgets/sidebar_doctor.dart';
 
-import '../widgets/sidebar.dart';
-import 'doctor_profile_page.dart';
-
 class DoctorHomePage extends StatefulWidget {
   final Size size;
   const DoctorHomePage({super.key, required this.size});
@@ -68,21 +65,21 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
 
     return SafeArea(
         child: Scaffold(
-          drawer: SidebarDoctor(size: widget.size),
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: Text(
-              "Home Page",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                fontFamily: 'Dosis',
-              ),
-            ),
-            centerTitle: true,
-            backgroundColor: maingreen,
+      drawer: SidebarDoctor(size: widget.size),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text(
+          "Home Page",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            fontFamily: 'Dosis',
           ),
+        ),
+        centerTitle: true,
+        backgroundColor: maingreen,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -95,7 +92,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                 },
                 child: const Text("Refresh"),
                 style:
-                    ElevatedButton.styleFrom(shape: BeveledRectangleBorder()),
+                    ElevatedButton.styleFrom(shape: const BeveledRectangleBorder()),
               ),
             ),
             SizedBox(
@@ -180,7 +177,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.library_books),
+                        const Icon(Icons.library_books),
                         Text(
                           open,
                           softWrap: true,
@@ -217,7 +214,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
             ),
             Text(
               message,
-              style: TextStyle(color: Colors.blue),
+              style: const TextStyle(color: Colors.blue),
             ),
             SingleChildScrollView(
               child: GestureDetector(
@@ -291,11 +288,11 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                                           milliseconds: 200),
                                                   barrierDismissible: true,
                                                 );
-              
+
                                                 // print("dateTime: $_opendateTime");
                                               },
-                                              child:
-                                                  const Text("SET OPENING TIME"),
+                                              child: const Text(
+                                                  "SET OPENING TIME"),
                                             ),
                                             //  Text( "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}")),
                                           )
@@ -364,11 +361,11 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                                           milliseconds: 200),
                                                   barrierDismissible: true,
                                                 );
-              
+
                                                 // print("dateTime: $_opendateTime");
                                               },
-                                              child:
-                                                  const Text("SET CLOSING TIME"),
+                                              child: const Text(
+                                                  "SET CLOSING TIME"),
                                             ),
                                             //  Text( "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}")),
                                           )
@@ -403,14 +400,17 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                     ));
                                   } else if (_opendateTime != null &&
                                       _closedateTime != null &&
-                                      (_opendateTime?.compareTo(DateTime.now()) ==
+                                      (_opendateTime
+                                                  ?.compareTo(DateTime.now()) ==
                                               0 ||
                                           _opendateTime
                                                   ?.compareTo(DateTime.now()) ==
                                               1) &&
-                                      _closedateTime?.compareTo(DateTime.now()) ==
+                                      _closedateTime
+                                              ?.compareTo(DateTime.now()) ==
                                           1 &&
-                                      _closedateTime?.compareTo(_opendateTime!) ==
+                                      _closedateTime
+                                              ?.compareTo(_opendateTime!) ==
                                           1) {
                                     String openTime =
                                         "Date: ${_opendateTime!.day}/${_opendateTime!.month}  Time: ${_opendateTime!.hour}:${_opendateTime!.minute}    ";
@@ -418,10 +418,9 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                         "Date: ${_closedateTime!.day}/${_closedateTime!.month} Time: ${_closedateTime!.hour}:${_closedateTime!.minute}    ";
                                     opendatetime = _opendateTime!;
                                     closedatetime = _closedateTime!;
-                                    bool isActive = await Appointments(
-                                             context)
-                                        .goActive(
-                                            _opendateTime!, _closedateTime!,userDetailsMap);
+                                    bool isActive = await Appointments(context)
+                                        .goActive(_opendateTime!,
+                                            _closedateTime!, userDetailsMap);
                                     if (isActive) {
                                       setState(() {
                                         open = openTime;
@@ -471,11 +470,12 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: widget.size.height * 0.01
-            ),
-            Text("Scheduled Appointments"),
-            ScheduledAppointments(docUid: userDetailsMap['uid'],size: widget.size,)
+            SizedBox(height: widget.size.height * 0.01),
+            const Text("Scheduled Appointments"),
+            ScheduledAppointments(
+              docUid: userDetailsMap['uid'],
+              size: widget.size,
+            )
           ],
         ),
       ),

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swasthya_setu/doctor_pages/reports.dart';
 import 'package:swasthya_setu/providers/details.dart';
 
 import 'package:swasthya_setu/utils/colours.dart';
@@ -7,7 +9,6 @@ import 'package:swasthya_setu/utils/drawer_item.dart';
 
 import '../doctor_pages/doctor_home_page.dart';
 import '../doctor_pages/doctor_profile_page.dart';
-import '../user_pages/User_Report_Page.dart';
 
 class SidebarDoctor extends StatefulWidget {
   final Size size;
@@ -15,6 +16,7 @@ class SidebarDoctor extends StatefulWidget {
   const SidebarDoctor({Key? key, required this.size}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SidebarState createState() => _SidebarState();
 }
 
@@ -67,9 +69,10 @@ class _SidebarState extends State<SidebarDoctor> {
   }
 
   Widget headerWidget(Map<String, dynamic> userDetailsMap, Size size) {
-    return GestureDetector( onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: ((context) => DoctorProfilePage(
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: ((context) => DoctorProfilePage(
                 size: widget.size,
                 name: userDetailsMap['name'],
                 number: userDetailsMap['number'],
@@ -79,8 +82,8 @@ class _SidebarState extends State<SidebarDoctor> {
                 mail: userDetailsMap['email'],
                 address: userDetailsMap['address'],
               )),
-            ));
-          },
+        ));
+      },
       child: Column(
         children: [
           CircleAvatar(
@@ -92,12 +95,16 @@ class _SidebarState extends State<SidebarDoctor> {
             children: [
               Text(
                 "${userDetailsMap['name']}",
-                style: TextStyle(color: Colors.black, fontSize: 30,fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(width: 20),
               Text(
                 "${userDetailsMap['specialization']}",
-                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
               ),
             ],
           ),
@@ -118,7 +125,11 @@ class _SidebarState extends State<SidebarDoctor> {
         break;
       case 1:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UserReportPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => Reports(
+                      userUid: FirebaseAuth.instance.currentUser!.uid,
+                    )));
         break;
       case 2:
         Navigator.push(

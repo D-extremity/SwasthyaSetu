@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:swasthya_setu/doctor_pages/patient_profile.dart';
+import 'package:swasthya_setu/pages/report_view.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/gettime.dart';
 
-Widget scheduledTile(DocumentSnapshot document, Size size) {
+Widget patientTile(DocumentSnapshot document, Size size) {
   Map<String, dynamic> doc = (document.data() as Map<String, dynamic>);
   return LayoutBuilder(
     builder: (BuildContext context, BoxConstraints constraints) => Padding(
@@ -31,7 +31,7 @@ Widget scheduledTile(DocumentSnapshot document, Size size) {
               ),
               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
               Text(
-                "Booking Status : 'Booked/Attended/Missed'",
+                "Attended on : ${getDateTimeText((doc["attentedAt"] as Timestamp).toDate())}",
                 style: TextStyle(
                     color: Colors.black45,
                     fontWeight: FontWeight.w600,
@@ -57,7 +57,7 @@ Widget scheduledTile(DocumentSnapshot document, Size size) {
               Row(
                 children: [
                   Text(
-                    "Check Patient Details : ",
+                    "Check Report Details : ",
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: constraints.maxWidth * 0.04),
@@ -66,16 +66,9 @@ Widget scheduledTile(DocumentSnapshot document, Size size) {
                       child: const Text("Click Here"),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PatientProfilePage(
-                              patientMap:doc,
-                                size: size,
-                                name: doc['name'],
-                                number: doc['number'],
-                                age: doc['age'],
-                                image: doc['photoURL'],
-                                gender: doc['gender'],
-                                mail: doc['email'],
-                                address: doc['address'])));
+                            builder: (context) => WriteReportView(
+                                patientMap: doc,
+                                )));
                       })
                 ],
               )
@@ -86,6 +79,3 @@ Widget scheduledTile(DocumentSnapshot document, Size size) {
     ),
   );
 }
-
-
-

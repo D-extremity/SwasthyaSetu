@@ -12,7 +12,7 @@ import 'package:swasthya_setu/utils/drawer_item.dart';
 
 
 import '../pages/historyappointments.dart';
-import '../user_pages/User_Report_Page.dart';
+import '../user_pages/user_report_page.dart';
 
 
 class Sidebar extends StatefulWidget {
@@ -22,6 +22,7 @@ class Sidebar extends StatefulWidget {
   const Sidebar({Key? key, required this.size,required this.userid}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SidebarState createState() => _SidebarState();
 }
 
@@ -98,7 +99,7 @@ class _SidebarState extends State<Sidebar> {
           const SizedBox(width: 30),
           Text(
             "${userDetailsMap['name']}",
-            style: TextStyle(color: Colors.black, fontSize: 30,fontWeight: FontWeight.w600),
+            style: const TextStyle(color: Colors.black, fontSize: 30,fontWeight: FontWeight.w600),
           ),
         ],
       ),
@@ -119,7 +120,7 @@ class _SidebarState extends State<Sidebar> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => UserReportPage()));
+                builder: (context) => const UserReportPage()));
         break;
       case 2:
         Navigator.push(
