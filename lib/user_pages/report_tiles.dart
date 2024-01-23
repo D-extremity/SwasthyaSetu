@@ -67,7 +67,7 @@ Widget reportTile(DocumentSnapshot document) {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => WriteReportView(
-                                patientMap: doc,
+                                  patientMap: doc,
                                 )));
                       })
                 ],
