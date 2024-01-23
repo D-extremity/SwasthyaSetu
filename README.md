@@ -7,6 +7,8 @@ keep record online and also can send patient reports through it .
 Other side, Patient can book appointment to doctor prior to doctor closing time 
 and can get his reports in report section , and patient can see his all the appointment in appointment section.
 
+Download [Swasthya Setu](https://github.com/D-extremity/SwasthyaSetu/releases/download/swasthya_setu_1.0/app-release.apk)
+
 ## Preview Of Swasthya Setu :)
 
 ### Main Working At Glance
