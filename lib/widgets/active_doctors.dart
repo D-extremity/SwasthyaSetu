@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:swasthya_setu/backend/appointment.dart';
 import 'package:swasthya_setu/widgets/doctorcard.dart';
 
+List<Map<String, dynamic>> searchedListByUser = [{}];
+
 class ActiveDoctorList extends StatelessWidget {
   final Size size;
   const ActiveDoctorList({super.key, required this.size});
@@ -18,12 +20,21 @@ class ActiveDoctorList extends StatelessWidget {
             child: Text("Loading...\nNetwork is Slow"),
           );
         } else if (snapshot.hasData) {
+          // print("*******");
+          // print(snapshot.data!.docs
+          //     .map((document) => (document.data() as Map<String,dynamic>))
+          //     .toList());
+          // print("*******");
+          List<Map<String, dynamic>> allDoctors = snapshot.data!.docs
+              .map((document) => (document.data() as Map<String, dynamic>))
+              .toList();
+          searchedListByUser = allDoctors;
           return ListView.builder(
               itemCount: snapshot.data!.size,
               itemBuilder: (context, int index) {
                 return snapshot.data!.docs
                     .map((document) =>
-                        doctorCard( size,  document,context))
+                        doctorCard(size, searchedListByUser[index], context))
                     .toList()[index];
               });
         } else if (snapshot.hasError) {

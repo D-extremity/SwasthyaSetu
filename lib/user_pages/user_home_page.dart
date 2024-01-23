@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swasthya_setu/providers/details.dart';
+import 'package:swasthya_setu/user_pages/searchpage.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/widgets/active_doctors.dart';
 import 'package:swasthya_setu/widgets/addresswidget.dart';
@@ -28,7 +29,8 @@ class _UserHomePageState extends State<UserHomePage> {
     Map<String, dynamic> userDetailsMap =
         Provider.of<UserDetailsProvider>(context, listen: true)
             .getUserDetailsMap;
-
+    // TextEditingController searchbar = TextEditingController();
+    List<Map<String, dynamic>> results = [{}];
     return SafeArea(
       child: Scaffold(
         drawer: Sidebar(size: widget.size, userid: userDetailsMap['uid']),
@@ -56,13 +58,28 @@ class _UserHomePageState extends State<UserHomePage> {
                     vertical: 10.0,
                     horizontal: 15,
                   ),
-                  hintText: "Search Doctors",
+                  hintText: "Search Doctor by Name",
                   suffixIcon: const Icon(Icons.search_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                     borderSide: const BorderSide(),
                   ),
                 ),
+                onChanged: (doctorName) {
+                  results = searchedListByUser
+                      .where((activeDoctor) => activeDoctor["name"]
+                          .toString()
+                          .toLowerCase()
+                          .contains(doctorName))
+                      .toList();
+                  // print(results);
+                },
+                onSubmitted: (value) {
+                  // print(value);
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => UserDoctorSearchPage(
+                          searchedList: results, value: value)));
+                },
               ),
               SizedBox(
                 height: widget.size.height * 0.002,

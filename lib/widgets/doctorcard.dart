@@ -5,9 +5,11 @@ import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/utils/gettime.dart';
 import 'package:swasthya_setu/widgets/textwidget.dart';
 
-Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
-  Map<String, dynamic> doctorInfo = document.data() as Map<String, dynamic>;
+// Widget doctorCard(Size size, DocumentSnapshot document, BuildContext context) {
+//   Map<String, dynamic> doctorInfo = document.data() as Map<String, dynamic>;
 
+Widget doctorCard(Size size, Map<String,dynamic> doctorInfo, BuildContext context) {
+  // Map<String, dynamic> doctorInfo = document.data() as Map<String, dynamic>;
   return Column(
     children: [
       GestureDetector(

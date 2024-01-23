@@ -11,10 +11,11 @@ class Contacts extends StatelessWidget {
     return Row(
       children: [
         Icon(icon),
+        SizedBox(width: 2,),
         Text(
           value,
           style: TextStyle(
-              fontSize: size.height * 0.02, fontWeight: FontWeight.w500),
+              fontSize: size.height * 0.02, fontWeight: FontWeight.w500,color: Colors.blue.shade700),
         )
       ],
     );

@@ -48,6 +48,8 @@ dependencies:
   omni_datetime_picker: ^1.0.9
   auto_size_text: ^3.0.0
   uuid: ^4.2.2
+  maps_launcher: ^2.2.0
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   flutter_test:
