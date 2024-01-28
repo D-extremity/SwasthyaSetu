@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:swasthya_setu/apikey.dart';
+import 'package:swasthya_setu/openapikey.dart';
 
 Future<String> makeApiRequest(String prompt) async {
   final String apiUrl =
