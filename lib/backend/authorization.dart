@@ -127,7 +127,7 @@ class UserAuthorization {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => UserHomePage(size: size)),(Route<dynamic> route) => false);
     } catch (e) {
-      // print(e);
+      print(e);
       getScaffold(e.toString(), context, Colors.red);
     }
   }

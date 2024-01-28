@@ -30,27 +30,30 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        routes: {
-          'doctorHomePage':(context) => DoctorHomePage(size: size)
-        },
+        routes: {'doctorHomePage': (context) => DoctorHomePage(size: size)},
         theme: ThemeData(useMaterial3: true),
         debugShowCheckedModeBanner: false,
         home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
             // FirebaseFirestore getData = FirebaseFirestore.instance;
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: Text("Loading.."),
+              );
+            }
             if (snapshot.hasError) {
               return const Text("Loading");
-            } else if (snapshot.hasData) {
-              User getData = snapshot.data as User;
-              if (getData.displayName == "User") {
-                
-
-                return UserHomePage(
-                  size: size,
-                );
-              } else if (getData.displayName == "Doctor") {
-                return DoctorHomePage(size: size);
+            } else if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.hasData) {
+                User getData = snapshot.data as User;
+                if (getData.displayName == "User") {
+                  return UserHomePage(
+                    size: size,
+                  );
+                } else if (getData.displayName == "Doctor") {
+                  return DoctorHomePage(size: size);
+                }
               }
             }
             // print(getData.displayName);

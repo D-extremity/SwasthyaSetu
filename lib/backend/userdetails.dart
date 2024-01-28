@@ -12,7 +12,7 @@ class DoctorDetails {
   final List specializations;
   final String number;
   final String type;
-
+       
   DoctorDetails(
       this.uid,
       this.age,
@@ -43,8 +43,8 @@ class DoctorDetails {
       "specialization": specializations,
       "type": type,
       "number": number,
-      "open":"Nill",
-      "close":"Nill"
+      "open": "Nill",
+      "close": "Nill"
     };
   }
 }

@@ -41,7 +41,7 @@ class _SigninUserPageState extends State<SigninUserPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 199, 215, 180),
+      backgroundColor: const Color.fromARGB(255, 199, 215, 180),
       //backgroundColor: Colors.white,
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
@@ -54,15 +54,18 @@ class _SigninUserPageState extends State<SigninUserPage> {
                   height: constraints.maxHeight * 0.02,
                 ),
                 GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => LoginPage()));
-                    },
-                    child: const Text(
-                      "Already Have an Account? Click Here",
-                      style: TextStyle(color: maingreen,fontSize: 20,fontFamily: 'Dosis-Regular'),
-                    ),
-                    ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: const Text(
+                    "Already Have an Account? Click Here",
+                    style: TextStyle(
+                        color: maingreen,
+                        fontSize: 20,
+                        fontFamily: 'Dosis-Regular'),
+                  ),
+                ),
                 SizedBox(
                   height: constraints.maxHeight * 0.02,
                 ),
@@ -184,12 +187,17 @@ class _SigninUserPageState extends State<SigninUserPage> {
                                     _getName.text.trim(),
                                     dropDownvalue!,
                                     _getPassword.text.trim(),
-                                    context,widget.size,_getNumber.text)
+                                    context,
+                                    widget.size,
+                                    _getNumber.text)
                                 .signUpWithEmail(image);
                           }
                         },
                         color: maingreen,
-                        child: const Text("Sign Up",style: TextStyle(color:Colors.white),),
+                        child: const Text(
+                          "Sign Up",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
