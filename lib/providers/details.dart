@@ -26,7 +26,7 @@ class UserDetailsProvider extends ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .get();
     _userDetailsMap = userDetailsSnap.data() as Map<String, dynamic>;
-    print(_userDetailsMap);
+    // print(_userDetailsMap);
     notifyListeners();
   }
 }

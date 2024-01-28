@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swasthya_setu/providers/details.dart';
+import 'package:swasthya_setu/user_pages/gptscreen.dart';
 import 'package:swasthya_setu/user_pages/searchpage.dart';
 import 'package:swasthya_setu/utils/colours.dart';
 import 'package:swasthya_setu/widgets/active_doctors.dart';
@@ -33,6 +34,29 @@ class _UserHomePageState extends State<UserHomePage> {
     List<Map<String, dynamic>> results = [{}];
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(right: 20.0, bottom: 20),
+          child: Card(
+            shape: const CircleBorder(),
+            color: maingreen,
+            child: SizedBox(
+              height: widget.size.height * 0.1,
+              width: widget.size.width * 0.15,
+              child: IconButton(
+                icon: Icon(
+                  Icons.chat,
+                  size: widget.size.height * 0.04,
+                ),
+                color: mainwhite,
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ChatGptScreen(userid:userDetailsMap['uid'], size: widget.size,)));
+                },
+              ),
+            ),
+          ),
+        ),
         drawer: Sidebar(size: widget.size, userid: userDetailsMap['uid']),
         backgroundColor: Colors.white,
         appBar: AppBar(
