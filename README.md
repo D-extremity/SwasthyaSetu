@@ -2,8 +2,8 @@
 
 Download [Swasthya Setu](https://github.com/D-extremity/SwasthyaSetu/releases/download/swasthya_setu_1.0/app-release.apk)
 ## _What does it do?_
-It is a small application through which doctor can show his/her presence
-by scheduling clinic time which could help him getting more patients and 
+It is a small application Integrated with AI Chat Bot to ask for Medical Related Issues,
+through this app doctor can show his/her presence by scheduling clinic time which could help him getting more patients and 
 keep record online and also can send patient reports through it . 
 Other side, Patient can book appointment to doctor prior to doctor closing time 
 and can get his reports in report section , and patient can see his all the appointment in appointment section.
@@ -14,6 +14,10 @@ and can get his reports in report section , and patient can see his all the appo
 ### Main Working At Glance
 
 https://github.com/D-extremity/SwasthyaSetu/assets/83233310/3d6fb6d0-2790-4864-bb50-3cc3125e691a
+
+### Ai Integrated Chat To ask For Medical Related Issues
+
+https://github.com/D-extremity/SwasthyaSetu/assets/83233310/f208f94a-d953-4d13-8a40-f53b5f3d53f7
 
 #### Doctor Side 
 

@@ -9,7 +9,9 @@ Future<String> makeApiRequest(String prompt) async {
   final body = {
     'prompt': {
       'text': prompt,
-    }
+    },
+     "temperature": 1.0,
+            "candidateCount": 2
   };
   final response = await http.post(
     Uri.parse(apiUrl),
